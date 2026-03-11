@@ -1,7 +1,7 @@
-public class Main {
+public class funcoes {
+    
     public static int f1(int n) {
-        int r = 0;
-        int op = 0;
+        int r = 0, op = 0;
         for (int i = 1; i < n; i++) {
             r = r + 1;
             op = op + 1;
@@ -10,8 +10,7 @@ public class Main {
     }
 
     public static int f2(int n) {
-        int r = 0;
-        int op = 0;
+        int r = 0, op = 0;
         for (int i = 1; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 op = op + 1;
@@ -21,57 +20,60 @@ public class Main {
         return op;
     }
 
-    //public static int f3(int n)
+    public static int f3(int n) {
+        int cont = 0;
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < n; j++) {
+                // print i*j retirado para não poluir a saída do Excel
+                cont++;
+            }
+        }
+        return cont;
+    }
 
-int f3(n)
-cont=0
-for (i=1; i<n; i++)
-for (j=1; j<n; j++)
-print i*j
-cont++
-return cont
+    public static int f4(int n) {
+        int r = 0;
+        for (int i = 1; i < n; i++) {
+            for (int j = i; j < 2 * i; j++) {
+                for (int k = i; k < j; k++) {
+                    r = r + 1;
+                }
+            }
+        }
+        return r;
+    }
 
-    //public static int f4(int n)
-    
-    int f4(n)
-r=0
-for (i=1; i<n; i++)
-for (j=i; j<2*i; j++)
-for (k=i; k<j; k++)
-r = r + 1
-return r
+    public static int f5(int n) {
+        int r = 0;
+        for (int i = 1; i < n; i++) {
+            for (int j = i; j < i + 3; j++) {
+                for (int k = i; k < j; k++) {
+                    r = r + 1;
+                }
+            }
+        }
+        return r;
+    }
 
-    //public static int f5(int n)
-
-int f5(n)
-r=0
-for (i=1; i<n; i++)
-for (j=i; j<i+3; j++)
-for (k=i; k<j; k++)
-r = r + 1
-return r
-
-    //public static int f6(int n)
-
-int f6(n)
-if (n==0)
-return 1
-else
-return f6(n-1) + f6(n-1)
+    public static long f6(int n) {
+        if (n <= 0) return 1;
+        // Cuidado: f6 cresce exponencialmente (2^n). 
+        // n=100 vai travar seu PC. Usei long, mas limite o N no loop.
+        return f6(n - 1) + f6(n - 1);
+    }
 
     public static void main(String[] args) {
-        int op = 0;
-        System.out.println("N    |#OP");
+        // Cabeçalho para o Excel
+        System.out.println("N;f1;f2;f3;f4;f5;f6");
 
-        //para cada funcao descomente a linha para chamar a funcao desejada
-        for (int n = 0; n <= 100; n+=10) {
-            op = f1(n);
-            //op = f2(n);
-            //op = f2(n);
-            //op = f2(n);
-            //op = f2(n);
-
-            System.out.println(n + "    |" + op);
+        for (int n = 0; n <= 30; n += 5) { // Reduzi o limite para 30 por causa da f6
+            System.out.print(n + ";");
+            System.out.print(f1(n) + ";");
+            System.out.print(f2(n) + ";");
+            System.out.print(f3(n) + ";");
+            System.out.print(f4(n) + ";");
+            System.out.print(f5(n) + ";");
+            System.out.println(f6(n));
         }
     }
 }
